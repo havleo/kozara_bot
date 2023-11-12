@@ -1,0 +1,10 @@
+services:
+  bot:
+    build:
+      context: .
+    secrets:
+      - token.json
+
+secrets:
+  token.json:
+    file: ./token.json
