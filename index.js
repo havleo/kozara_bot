@@ -17,7 +17,7 @@ client.commands = new Collection();
 
 const player = createAudioPlayer({
 	behaviors: {
-		noSubscriber: NoSubscriberBehavior.Pause,
+		noSubscriber: NoSubscriberBehavior.Stop,
 	}
 });
 

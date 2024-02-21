@@ -1,13 +1,16 @@
 const { createAudioResource } = require("@discordjs/voice");
-const { createVoiceChannel, getVoiceChannel } = require("../utils.js");
+const { getVoiceChannel } = require("../utils.js");
+const { resolve4 } = require("dns");
 
 module.exports = {
-	name: 'sraka',
+	name: "sraka",
 	async execute(message, audioPlayer) {
 		if (message.member.voice.channel) {
-			const resource = createAudioResource("http://193.105.67.24:8006/");
-			audioPlayer.play(resource);
-			getVoiceChannel(message).subscribe(audioPlayer);
+			resolve4("sraka.siradiostream.net", (err, records) => {
+				const resource = createAudioResource("https://" + records);
+				audioPlayer.play(resource);
+				getVoiceChannel(message).subscribe(audioPlayer);
+			});
 		}
 	},
 };

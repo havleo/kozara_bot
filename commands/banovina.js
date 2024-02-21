@@ -1,13 +1,16 @@
 const { createAudioResource } = require("@discordjs/voice");
-const { createVoiceChannel, getVoiceChannel } = require("../utils.js");
+const { getVoiceChannel } = require("../utils.js");
+const { resolve4 } = require("dns");
 
 module.exports = {
-	name: 'banovina',
+	name: "banovina",
 	async execute(message, audioPlayer) {
 		if (message.member.voice.channel) {
-			const resource = createAudioResource("http://stream1.radio-banovina.hr:9998/;");
-			audioPlayer.play(resource);
-			getVoiceChannel(message).subscribe(audioPlayer);
+			resolve4("audio.radio-banovina.hr", (err, records) => {
+				const resource = createAudioResource("https://" + records + ":9998/stream");
+				audioPlayer.play(resource);
+				getVoiceChannel(message).subscribe(audioPlayer);
+			})
 		}
 	},
 };

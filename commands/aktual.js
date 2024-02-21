@@ -1,13 +1,16 @@
 const { createAudioResource } = require("@discordjs/voice");
-const { createVoiceChannel, getVoiceChannel } = require("../utils.js");
+const { getVoiceChannel } = require("../utils.js");
+const { resolve4 } = require("dns");
 
 module.exports = {
-	name: 'aktual',
+	name: "aktual",
 	async execute(message, audioPlayer) {
 		if (message.member.voice.channel) {
-			const resource = createAudioResource("https://live.radio.si/Aktual");
-			audioPlayer.play(resource);
-			getVoiceChannel(message).subscribe(audioPlayer);
+			resolve4("live.radio.si", (err, records) => {
+				const resource = createAudioResource("https://" + records + "/Aktual");
+				audioPlayer.play(resource);
+				getVoiceChannel(message).subscribe(audioPlayer);
+			});
 		}
 	},
 };

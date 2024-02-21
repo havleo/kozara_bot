@@ -3,11 +3,11 @@ const { getVoiceChannel } = require("../utils.js");
 const { resolve4 } = require("dns");
 
 module.exports = {
-	name: "extra",
+	name: 'donji_miholjac',
 	async execute(message, audioPlayer) {
 		if (message.member.voice.channel) {
-			resolve4("streams.extrafm.hr", (err, records) => {
-				const resource = createAudioResource("http://" + records + ":8110/stream?2124");
+			resolve4("s8.iqstreaming.com", (err, records) => {
+				const resource = createAudioResource("https://" + records + ":8032/stream");
 				audioPlayer.play(resource);
 				getVoiceChannel(message).subscribe(audioPlayer);
 			});
