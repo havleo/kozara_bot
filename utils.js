@@ -14,5 +14,14 @@ module.exports = {
 			});
 		}
 		return connection;
-	}
-}
+	},
+	async execute(message, audioPlayer, domain, endpoint) {
+		if (message.member.voice.channel) {
+			resolve4("domain", (err, records) => {
+				const resource = createAudioResource("http://" + records + endpoint);
+				getVoiceChannel(message).subscribe(audioPlayer);
+				audioPlayer.play(resource);
+			});
+		}
+	},
+};

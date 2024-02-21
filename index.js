@@ -1,6 +1,6 @@
 const fs = require('node:fs');
-const {Client, Collection, IntentsBitField, Message} = require('discord.js');
-const {createAudioPlayer, getVoiceConnection, NoSubscriberBehavior} = require('@discordjs/voice');
+const { Client, Collection, IntentsBitField, Message } = require('discord.js');
+const { createAudioPlayer, getVoiceConnection, NoSubscriberBehavior } = require('@discordjs/voice');
 const { prefix } = require('./config.json');
 
 
@@ -10,9 +10,9 @@ intents.add(
 	IntentsBitField.Flags.Guilds,
 	IntentsBitField.Flags.GuildVoiceStates,
 	IntentsBitField.Flags.MessageContent,
-	)
+)
 
-const client = new Client({intents: intents});
+const client = new Client({ intents: intents });
 client.commands = new Collection();
 
 const player = createAudioPlayer({
@@ -22,7 +22,7 @@ const player = createAudioPlayer({
 });
 
 
-// Save commands in commandFiles
+// Load the commands in commandFiles
 const commandFiles = fs.readdirSync('./commands')
 	.filter(file => file.endsWith('.js'));
 
@@ -39,12 +39,14 @@ client.on('ready', () => {
 client.on('messageCreate', message => {
 	if (!message.content.startsWith(prefix)) return;
 
+	// Get the command
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName);
 	if (!command) return;
 
+	// Execute the command
 	try {
 		command.execute(message, player);
 	}
@@ -53,6 +55,7 @@ client.on('messageCreate', message => {
 		message.reply('There was an error trying to execute that command!');
 	}
 
+	// Delete the message
 	let timeout = 0;
 	if (commandName == 'help') timeout = 10000;
 	setTimeout(() => {
@@ -61,6 +64,7 @@ client.on('messageCreate', message => {
 });
 
 
+// Leave when channel empty
 client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 	if (newVoiceState.channel === null && oldVoiceState.channel.members.size <= 1) {
 		let connection = getVoiceConnection(newVoiceState.guild.id);

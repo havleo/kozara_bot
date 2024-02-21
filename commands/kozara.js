@@ -6,8 +6,8 @@ module.exports = {
 	async execute(message, audioPlayer) {
 		if (message.member.voice.channel) {
 			const resource = createAudioResource("http://51.254.61.148:11111/;");
-			audioPlayer.play(resource);
 			getVoiceChannel(message).subscribe(audioPlayer);
+			audioPlayer.play(resource);
 		}
 	},
 };
