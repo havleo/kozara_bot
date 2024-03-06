@@ -1,8 +1,8 @@
 const { execute } = require("../utils.js");
 
 module.exports = {
-	name: "sraka",
+	name: "snaga_krajine",
 	async execute(message, audioPlayer) {
-			execute(message, audioPlayer, "sraka.siradiostream.net");
+		execute(message, audioPlayer, "s7.voscast.com:7096", "/;");
 	},
 };

@@ -1,4 +1,6 @@
-const { getVoiceConnection, joinVoiceChannel } = require("@discordjs/voice");
+const { getVoiceConnection, joinVoiceChannel, createAudioResource, getVoiceChannel } = require("@discordjs/voice");
+const { getVoiceChannel } = require("discord.js");
+const { resolve4 } = require('dns');
 
 module.exports = {
 	getVoiceChannel(message) {

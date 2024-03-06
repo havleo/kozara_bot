@@ -1,7 +1,7 @@
 {
   "name": "kozara_bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "docker build -t ionard/kozara_bot:<version> .",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,6 @@
     "ffmpeg-static": "^5.2.0",
     "libsodium-wrappers": "^0.7.13",
     "sodium-native": "^4.0.4"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,5 +1,5 @@
 const fs = require('node:fs');
-const { Client, Collection, IntentsBitField, Message } = require('discord.js');
+const { Client, Collection, IntentsBitField } = require('discord.js');
 const { createAudioPlayer, getVoiceConnection, NoSubscriberBehavior } = require('@discordjs/voice');
 const { prefix } = require('./config.json');
 
@@ -74,4 +74,5 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 	}
 });
 
-client.login(process.env['DISCORD_TOKEN']);
+//client.login(process.env['DISCORD_TOKEN']);
+client.login('NzUzNjMyMjY2NzY0MTU2OTQ4.X1pAvg.f5U3Q2Qwi2kYE0wOj6g2SK0l8hw');
