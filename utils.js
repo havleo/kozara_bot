@@ -32,6 +32,5 @@ const resolvePlay = async (message, audioPlayer, domain, endpoint, protocol = "h
 
 module.exports = {
 	getVoiceChannel,
-	resolvePlay,
-	sleep
+	resolvePlay
 };
