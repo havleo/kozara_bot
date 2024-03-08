@@ -1,8 +1,8 @@
-const { execute } = require("../utils.js");
+const { resolvePlay } = require("../utils.js");
 
 module.exports = {
 	name: "aktual",
 	async execute(message, audioPlayer) {
-		execute(message, audioPlayer, "live.radio.si", "/Aktual");
+		await resolvePlay(message, audioPlayer, "live.radio.si", "/Aktual");
 	},
 };

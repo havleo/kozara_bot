@@ -3,7 +3,6 @@ const { Client, Collection, IntentsBitField } = require('discord.js');
 const { createAudioPlayer, getVoiceConnection, NoSubscriberBehavior } = require('@discordjs/voice');
 const { prefix } = require('./config.json');
 
-
 const intents = new IntentsBitField();
 intents.add(
 	IntentsBitField.Flags.GuildMessages,
@@ -36,7 +35,7 @@ client.on('ready', () => {
 	console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('messageCreate', message => {
+client.on('messageCreate', async message => {
 	if (!message.content.startsWith(prefix)) return;
 
 	// Get the command
@@ -48,7 +47,7 @@ client.on('messageCreate', message => {
 
 	// Execute the command
 	try {
-		command.execute(message, player);
+		await command.execute(message, player);
 	}
 	catch (error) {
 		console.error(error);
@@ -74,5 +73,4 @@ client.on('voiceStateUpdate', (oldVoiceState, newVoiceState) => {
 	}
 });
 
-//client.login(process.env['DISCORD_TOKEN']);
-client.login('NzUzNjMyMjY2NzY0MTU2OTQ4.X1pAvg.f5U3Q2Qwi2kYE0wOj6g2SK0l8hw');
+client.login(process.env['DISCORD_TOKEN']);

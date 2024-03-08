@@ -1,0 +1,6 @@
+services:
+  kozara_bot:
+    build: 
+      context: .
+      tags:
+        - "ionard/kozara_bot:1.1.1"
